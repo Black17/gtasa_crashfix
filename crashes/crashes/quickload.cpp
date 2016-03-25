@@ -103,21 +103,6 @@ bool quickLoadPatches( )
 		frame_limiter_on_addr = dwFPSSleep[2] - 0x9;
 
 		DWORD oldProt;
-		if (dwFPSSleep[1] != NULL) {
-			// Disable the 100FPS Lock
-			VirtualProtect((LPVOID)dwFPSSleep[0], 7, PAGE_EXECUTE_READWRITE, &oldProt);
-			HookInstall(dwFPSSleep[0], (DWORD)FPSStrafeHook, 7);
-
-			VirtualProtect((LPVOID)dwFPSSleep[1], 7, PAGE_EXECUTE_READWRITE, &oldProt);
-
-			MemPut <BYTE>(dwFPSSleep[1] + 0x2, 0x0);
-			MemPut <BYTE>(dwFPSSleep[1] + 0x4, 0x90);
-
-			VirtualProtect((LPVOID)dwFPSSleep[2], 5, PAGE_EXECUTE_READWRITE, &oldProt);
-			memcpy((void*)dwFPSSleep[2], "\x90\x90\x90\x90\x90", 5);
-
-			VirtualProtect((LPVOID)dwFPSSleep[3], 1, PAGE_EXECUTE_READWRITE, &oldProt);
-			MemPut <BYTE>(dwFPSSleep[3], 0x0);
 
 		}
 	}
